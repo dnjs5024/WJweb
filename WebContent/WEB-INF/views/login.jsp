@@ -71,7 +71,7 @@
 							Or Sign Up Using
 						</span>
 
-						<a href="#" class="txt2">
+						<a href="join" class="txt2">
 							Sign Up
 						</a>
 					</div>
@@ -83,11 +83,29 @@
 
 	<div id="dropDownSelect1"></div>
 <script>
+
 function doLogin(){
 	var uiId = $('#ui_id').val();
 	var uiPassword = $('#ui_pwd').val();
-	alert(uiId + ',' +uiPassword);
-		
+	var cmd = 'login';
+	var param = {
+			ui_Id : ui_id,
+			ui_Pwd : ui_pwd,
+		cmd : cmd
+	}
+	$.ajax({
+		method : 'POST',
+		url : '/ajax/user',
+		data : JSON.stringify(param),
+		contentType:'application/json',
+		success : function(res){
+			if(res.result){
+				alert('로그인 완료!');
+			}else{
+				alert('아이디 비밀번호를 확인해주세요');
+			}
+		}
+	});
 }
 </script>
 
